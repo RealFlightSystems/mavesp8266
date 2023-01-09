@@ -271,7 +271,7 @@ static void handle_setup()
     message += "<form action='/setparameters' method='post'>\n";
 
     message += "WiFi Mode:&nbsp;";
-    message += "<input type='radio' name='mode' value='0'";
+    message += "<input type='radio' name='mode' value='2'"; //Changed to 2 instead of 0 
     if (getWorld()->getParameters()->getWifiMode() == WIFI_MODE_AP) {
         message += " checked";
     }
