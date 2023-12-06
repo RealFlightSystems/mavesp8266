@@ -55,7 +55,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [d1_mini_pro, lolin_d32_pro]
+        target: [d1_mini_pro, lolin_d32_pro, esp01, esp32]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -69,3 +69,23 @@ jobs:
 
       - name: Build PlatformIO Project
         run: pio run -e ${{ matrix.target }}
+
+      - name: Get Release File Name & Upload URL
+        id: get_release_info
+        run: |
+          echo ::set-output name=file_name::firmware # RepositoryName-v1.0.0
+          value=`cat release_url/release_url.txt`
+          echo ::set-output name=upload_url::$value
+        env:
+          TAG_REF_NAME: ${{ steps.get_version.outputs.VERSION }}
+          REPOSITORY_NAME: ${{ github.repository }}
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+          asset_path: .pio/build/firmware.bin
+          asset_name: ${{ steps.get_release_info.outputs.file_name }}-${{ matrix.target }}.bin
+          asset_content_type: application/zip
