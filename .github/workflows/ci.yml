@@ -55,7 +55,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [d1_mini_pro, lolin_d32_pro, esp01, espwroom32]
+        target: [d1_mini_pro, lolin_d32_pro, esp01]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
