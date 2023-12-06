@@ -57,6 +57,10 @@ jobs:
       matrix:
         target: [d1_mini_pro, lolin_d32_pro]
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
