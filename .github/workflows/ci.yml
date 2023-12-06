@@ -70,13 +70,13 @@ jobs:
       - name: Build PlatformIO Project
         run: |
           pio run -e ${{ matrix.target }}
-          mv .pio/build/firmware.bin ./firmware
+          mv .pio/build/${{ matrix.target }}/firmware.bin ./firmware-${{ matrix.target }}
         
 
       - name: Get Release File Name & Upload URL
         id: get_release_info
         run: |
-          echo ::set-output name=file_name::firmware # RepositoryName-v1.0.0
+          echo ::set-output name=file_name::firmware-${{ matrix.target }} # RepositoryName-v1.0.0
           value=`cat release_url/release_url.txt`
           echo ::set-output name=upload_url::$value
         env:
@@ -89,6 +89,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_release_info.outputs.upload_url }}
-          asset_path: firmware
-          asset_name: ${{ steps.get_release_info.outputs.file_name }}-${{ matrix.target }}.bin
+          asset_path: firmware-${{ matrix.target }}
+          asset_name: ${{ steps.get_release_info.outputs.file_name }}.bin
           asset_content_type: application/zip
