@@ -71,7 +71,11 @@ jobs:
         run: |
           pio run -e ${{ matrix.target }}
           mv .pio/build/${{ matrix.target }}/firmware.bin ./firmware-${{ matrix.target }}
-        
+
+      - name: Load Release URL File from release job
+        uses: actions/download-artifact@v1
+        with:
+          name: release_url
 
       - name: Get Release File Name & Upload URL
         id: get_release_info
