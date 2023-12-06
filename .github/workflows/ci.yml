@@ -47,7 +47,7 @@ jobs:
         path: release_url.txt
 
 
-build:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
