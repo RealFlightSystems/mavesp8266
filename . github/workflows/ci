@@ -1,4 +1,4 @@
-name: esp-vtx air and ground 
+name: mavesp
 
 on:
   push:
