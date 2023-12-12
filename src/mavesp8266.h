@@ -66,7 +66,7 @@
 #include <ardupilotmega/mavlink.h>
 
 
-#if !defined(ARDUINO_ESP32_DEV) && !defined(ARDUINO_ESP32S3_DEV) && !defined(ARDUINO_ESP32C3_DEV)
+#if !defined(ARDUINO_ESP32_DEV) && !defined(ARDUINO_ESP32S3_DEV) && !defined(ARDUINO_ESP32C3_DEV) && !defined(ARDUINO_ESP32) && !defined(ESP32)
  extern "C" {
     // Espressif SDK
     #include "user_interface.h"
