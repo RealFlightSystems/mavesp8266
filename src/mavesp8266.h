@@ -38,6 +38,8 @@
 #ifndef MAVESP8266_H
 #define MAVESP8266_H
 
+#include <Arduino.h>
+
 /*
  * https://www.espressif.com/en/products/devkits
  * ESP32 Series
@@ -47,11 +49,14 @@
  * Modules: ESP32-S3-WROOM-1, ESP32-S3-WROOM-1U, ESP32-S3-WROOM-2, ESP32-S3-WROOM-2U
  * 
  */
-#if defined(ARDUINO_ESP32_DEV) || defined(ARDUINO_ESP32S3_DEV) || defined (ARDUINO_ESP32C3_DEV)
+#if defined(ARDUINO_ESP32_DEV) || defined(ARDUINO_ESP32S3_DEV) || defined (ARDUINO_ESP32C3_DEV) || defined(ARDUINO_ESP32) || defined(ESP32) || defined(ESP32_DEV)
+
 #include <WiFi.h>
-#include <Arduino.h>
+
 #else
+
 #include <ESP8266WiFi.h>
+
 #endif
 
 #include <WiFiClient.h>
